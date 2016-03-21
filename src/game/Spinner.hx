@@ -47,9 +47,11 @@ class Spinner extends Sprite
 	public function moveTo(targetX:Float, targetY:Float): Void {
 		moving = true;
 		
-		if (targetX == null) targetX = x;
-		
 		Actuate.tween (this, moveToDuration, { x: targetX, y: targetY } ).ease (Expo.easeOut).onComplete (this_onMoveToComplete);
+	}
+	
+	public function moveToY(targetY:Float): Void {
+		moveTo (x, targetY);
 	}
 	
 	private function this_onMoveToComplete ():Void {

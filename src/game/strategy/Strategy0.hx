@@ -30,7 +30,6 @@ class Strategy0 implements IStrategy
 		moveSpinner();
 	}
 	
-	// todo: to base class
 	private function changeIndex():Void {
 		index --;
 		if (index < 0) {
@@ -40,14 +39,12 @@ class Strategy0 implements IStrategy
 	
 	private function moveSpinner():Void {
 		var y:Float = board.getPosition(index, 0).y;
-		spinner.moveTo(null, Std.int(y));
+		spinner.moveToY(Std.int(y));
 	}
 	
 	private function hideSpinner(show:Bool = false):Void {
 		spinner.visible = show;
 	}
 	
-	//public function spennerXXX(from:Int, to:Int) {
-		//
-	//}
+
 }

@@ -13,6 +13,9 @@ import openfl.filters.DropShadowFilter;
 import openfl.events.MouseEvent;
 import openfl.Assets;
 
+// for test
+import game.server.GameRequest;
+
 /**
  * ...
  * @author vova
@@ -39,6 +42,7 @@ class GameStage extends Sprite
 		spinButton = new SpinButton();
 		score = new Score();
 		spinner = new Spinner(board.NUM_COLUMNS);
+		
 		strategy = new Strategy0(spinner, board);
 	}
 		
@@ -70,6 +74,12 @@ class GameStage extends Sprite
 	function onSpinClicked(e:MouseEvent) {
 
 		strategy.spin();
+		
+		trace("rrrrrrrrrrrrrrrrrr");
+		
+		var request = new GameRequest();
+		request.ss();
+		
 	}
 
 }

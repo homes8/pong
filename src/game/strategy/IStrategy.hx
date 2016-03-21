@@ -6,4 +6,5 @@ package game.strategy;
 interface IStrategy
 {
 	public function spin ():Void;
+	private function changeIndex():Void;
 }
