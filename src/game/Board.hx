@@ -1,22 +1,30 @@
 package game;
 
-import openfl.display.Sprite;
-import openfl.geom.Point;
+import flixel.FlxSprite;
+//import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup;
+import flixel.math.FlxPoint;
 
 /**
  * ...
  * @author vova
  */
-class Board extends Sprite
+class Board extends FlxSpriteGroup
 {
 	public var NUM_COLUMNS:Int = 5;
 	public var NUM_ROWS:Int = 9;
 	
-	private var tiles:Array < Array < Tile >> ;
-	private var data:BoardData;
+	private var _tiles:Array < Array < Tile >> ;
+	private var _data:BoardData;
 	
 	public var x2 (get, null):Float;
 	public var y2 (get, null):Float;
+	
+//	public var x (get, null):Float;
+//	public var y (get, null):Float;
+	
+	public var w (get, null):Float;
+	public var h (get, null):Float;
 	
 	private function new()
 	{
@@ -24,29 +32,44 @@ class Board extends Sprite
 		
 		initialize();
 		construct();
-		
 	}
 	
 	private function initialize ():Void {
 		
-		tiles = new Array <Array <Tile>> ();
+		_tiles = new Array <Array <Tile>> ();
 		
 		for (row in 0...NUM_ROWS) {
 			
-			tiles[row] = new Array <Tile> ();
+			_tiles[row] = new Array <Tile> ();
 			
 			for (column in 0...NUM_COLUMNS) {
 				
-				tiles[row][column] = null;
+				_tiles[row][column] = null;
 			}
 		}
 	}
 	
 	public function get_x2():Float {
-		return x + width;
+		return 0; //x + width;
 	}
 	
 	public function get_y2():Float {
+		return 0; // y + height;
+	}
+	/*
+	public function get_x():Float {
+		return 0; //x + width;
+	}
+	
+	public function get_y():Float {
+		return 0; // y + height;
+	}
+	*/
+	public function get_w():Float {
+		return x + width;
+	}
+	
+	public function get_h():Float {
 		return y + height;
 	}
 	
@@ -55,37 +78,34 @@ class Board extends Sprite
 	}
 	
 	public function loadBoard (boardData: BoardData):Void {
-		data = boardData;
+		_data = boardData;
 		
 		for (row in 0...NUM_ROWS) {
 			for (column in 0...NUM_COLUMNS) {
 				
-				addTile (row, column, data.data[row][column]);
+				addTile (row, column, _data.data[row][column]);
 			}
 		}
 	}
 	
-	private function addTile (row:Int, column:Int, type:Int):Void {
+	private function addTile(row:Int, column:Int, type:Int):Void {
 		
-		var tile = new Tile (data.tileImages[type]);
-		
-		tile.initialize ();
-	
+		var tile = new Tile(_data.tileImages[type]);
 		tile.type = type;
 		tile.row = row;
 		tile.column = column;
 		
-		tiles[row][column] = tile;
+		_tiles[row][column] = tile;
 		
-		var position = getPosition (row, column);
+		var position = getTilePosition(row, column);
 		tile.x = position.x;
 		tile.y = position.y;
 		
-		addChild (tile);
+		add(tile);
 	}
 	
-	public function getPosition (row:Int, column:Int):Point {
-		return new Point (column * Tile.W, row * Tile.H);
+	public function getTilePosition(row:Int, column:Int):FlxPoint {
+		return new FlxPoint(column * Tile.W, row * Tile.H);
 	}
 }
 

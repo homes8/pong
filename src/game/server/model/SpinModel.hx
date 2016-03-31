@@ -13,23 +13,24 @@ typedef SpinResponse = {
  */
 class SpinModel //implements IModel
 {
-	private var response:SpinResponse;
+	//private var response:SpinResponse;
 
 	public function new(json:String)
 	{
 		//super();
 		
-		response = parse(json);
+		//response = parse(json);
 		
 	}
 	
-	private function parse(json:String): SpinResponse
+	private function parse(json:String)//: SpinResponse
 	{
+		/*
 		try {
 		return haxe.Json.parse(json);
-		} catch() {
+		} catch(e) {
 			
-		}
+		}*/
 	}
 	
 }

@@ -1,12 +1,12 @@
 package;
-//package game;
 
-
+import flixel.FlxGame;
 import openfl.display.Sprite;
-import openfl.Lib;
-import openfl.events.Event;
+//import openfl.Lib;
+//import openfl.events.Event;
 
-import game.GameStage;
+//import lobby.LobbyStage;
+import game.GameState;
 
 
 /**
@@ -15,32 +15,29 @@ import game.GameStage;
  */
 class Main extends Sprite
 {
-	private var Game:GameStage;
+	//private var Game:GameStage;
 	
 	public function new()
 	{
 		super();
+		addChild(new FlxGame(800, 600, GameState));
 		
-		initialize ();
-		construct ();
+		//initialize ();
+		//construct ();
 		
 		//resize (stage.stageWidth, stage.stageHeight);
 		//stage.addEventListener (Event.RESIZE, stage_onResize);
 	}
 	
-	private function initialize ():Void {
-		
-		Game = new GameStage ();
-		
-	}
+	//private function initialize ():Void {
+	//	Game = new GameStage ();
+	//}
 	
-	private function construct ():Void {
-		
-		addChild (Game);
-		
-	}
+	//private function construct ():Void {
+	//	addChild (Game);
+	//}
 	
-	private function resize (newWidth:Int, newHeight:Int):Void {
+	//private function resize (newWidth:Int, newHeight:Int):Void {
 		/*
 		Background.width = newWidth;
 		Background.height = newHeight;
@@ -52,7 +49,7 @@ class Main extends Sprite
 		Footer.x = newWidth / 2 - Footer.width / 2;
 		Footer.y = newHeight - Footer.height;
 		*/
-	}
+	//}
 	
 	
 	//private function stage_onResize (event:Event):Void {

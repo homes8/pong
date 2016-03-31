@@ -38,7 +38,7 @@ class Strategy0 implements IStrategy
 	}
 	
 	private function moveSpinner():Void {
-		var y:Float = board.getPosition(index, 0).y;
+		var y:Float = board.getTilePosition(index, 0).y;
 		spinner.moveToY(Std.int(y));
 	}
 	
