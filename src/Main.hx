@@ -1,12 +1,9 @@
 package;
 
-import flixel.FlxGame;
 import openfl.display.Sprite;
-//import openfl.Lib;
-//import openfl.events.Event;
-
-//import lobby.LobbyStage;
-import game.GameState;
+import flixel.FlxGame;
+import lobby.LobbyState;
+//import game.GameState;
 
 
 /**
@@ -20,7 +17,7 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(800, 600, GameState));
+		addChild(new FlxGame(800, 600, LobbyState));
 		
 		//initialize ();
 		//construct ();

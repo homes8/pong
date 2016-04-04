@@ -1,19 +1,21 @@
 package game;
 
+import flixel.FlxG;
 import flixel.FlxState;
 import flixel.input.mouse.FlxMouseButton.FlxMouseButtonID;
 import game.Board.BoardData;
 import game.strategy.IStrategy;
 import game.strategy.Strategy0;
+import lobby.LobbyState;
 //import openfl.display.Sprite;
 
 //import openfl.text.TextField;
-import openfl.text.TextFormat;
-import openfl.text.TextFormatAlign;
-import openfl.filters.BlurFilter;
-import openfl.filters.DropShadowFilter;
-import openfl.events.MouseEvent;
-import openfl.Assets;
+//import openfl.text.TextFormat;
+//import openfl.text.TextFormatAlign;
+//import openfl.filters.BlurFilter;
+//import openfl.filters.DropShadowFilter;
+//import openfl.events.MouseEvent;
+//import openfl.Assets;
 
 // for test
 //import game.server.GameRequest;
@@ -26,6 +28,7 @@ class GameState extends FlxState
 {
 	private var _board:Board;
 	private var _spinButton:SpinButton;
+	private var _backButton:BackButton;
 	private var _score:Score;
 	private var _spinner:Spinner;
 	
@@ -50,7 +53,8 @@ class GameState extends FlxState
 		
 	private function initialize ():Void {
 		_board = new Board();
-		_spinButton = new SpinButton(onSpinClicked);
+		_spinButton = new SpinButton(_onSpinClicked);
+		_backButton = new BackButton(_onBackClicked);
 		_score = new Score();
 		_spinner = new Spinner(_board.NUM_COLUMNS);
 		
@@ -68,7 +72,11 @@ class GameState extends FlxState
 		_spinButton.x = xOffset + 10;
 		_spinButton.y = yOffset - _spinButton.height;
 		add(_spinButton);
-
+	
+		_backButton.x = xOffset + 10;
+		_backButton.y = 50;
+		add(_backButton);
+		
 		_score.x = xOffset + 10;
 		_score.y = 20;
 		_score.text ("1234567890");
@@ -83,14 +91,17 @@ class GameState extends FlxState
 		//_spinButton.onUp = new FlxMouseButtonID(onSpinClicked);
 	}
 	
-	function onSpinClicked() {
+	function _onSpinClicked():Void {
 		_strategy.spin();
 		
 		trace("rrrrrrrrrrrrrrrrrr");
 		
 		//var request = new GameRequest();
 		//request.ss();
-		
+	}
+
+	function _onBackClicked():Void {
+		FlxG.switchState(new LobbyState());
 	}
 
 }
