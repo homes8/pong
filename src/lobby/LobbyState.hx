@@ -16,8 +16,7 @@ class LobbyState extends FlxState
 {
 	private var _levels:FlxGroup;
 	private var _current:Int;
-	private var W:Int = 100;
-	private var H:Int = 100;
+	private var _currentLevel = 3;
 	
 	
 	override public function create():Void
@@ -36,22 +35,27 @@ class LobbyState extends FlxState
 		var bx:Int = 10;
 		var by:Int = 10;
 		var level:Int = 0;
+		var tempLevel:GameIcon;
 		
 		for (y in 0...3)
 		{
 			for (x in 0...3)
 			{
-				var tempLevel:GameIcon = new GameIcon(bx, by, ++level, _onLevelClicked.bind(level));
+				++level;
+				
+				if (level > _currentLevel) {
+					tempLevel = new GameIconLocked(bx, by, level);
+				} else {
+					tempLevel = new GameIcon(bx, by, level, _onLevelClicked.bind(level));
+				}
 				//tempLevel.makeGraphic(W, H, 0xffd03ad1);
-				//tempLevel.add();
-
 				
 				_levels.add(tempLevel);
-				bx += W + 10;
+				bx += GameIcon.W + 10;
 			}
 			
 			bx = 10;
-			by += H + 30;
+			by += GameIcon.H + 30;
 		}
 		
 		add(_levels);

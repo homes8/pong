@@ -40,16 +40,6 @@ class GameState extends FlxState
 		construct();
 		super.create();
 	}
-
-	
-	
-//	public function new()
-//	{
-//		super.create();
-		
-//		initialize();
-//		construct();
-//	}
 		
 	private function initialize ():Void {
 		_board = new Board();
