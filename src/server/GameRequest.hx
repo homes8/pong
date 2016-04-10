@@ -1,12 +1,12 @@
-package game.server;
+package server;
 
 //import neko.vm.Loader;
-import game.server.model.SpinModel;
+import server.model.SpinModel;
 import openfl.net.URLLoader;
 import openfl.net.URLRequest;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-import game.server.model.SpinModel;
+import server.model.SpinModel;
 
 
 /**

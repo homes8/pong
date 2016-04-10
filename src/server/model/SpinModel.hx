@@ -1,4 +1,4 @@
-package game.server.model;
+package server.model;
 
 //import game.server.model.IModel;
 
