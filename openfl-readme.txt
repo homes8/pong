@@ -1,3 +1,13 @@
+#############################################################
+# HXSSL Installation and Distribution (Linux, iOS, Windows) #
+#############################################################
+
+    - follow this instructions: http://lib.haxe.org/p/hxssl/;
+    - navigate to the Haxe installation and search for the 'hxssl.ndll';
+    - copy 'hxssl.ndll' for the respective platform to the 'bin/<PLATFORM>/<COMPILER>/bin', e. g.: 'bin/Windows/neko/bin'
+
+
+
 About OpenFL
 
   OpenFL is the successor of NME, for Haxe 3+.

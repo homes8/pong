@@ -16,9 +16,11 @@ interface IRequest {
     public function getUrl(): URL;
 
     public function getCacheKey(): String;
-    
+
+    public function canBeParallel(): Bool;
+
     public function setCacheEntry(): Void;
-    
+
     public function addHeader(header: String, value: String): Void;
 
     public function setHeaders(headers: List<NetworkHeader>): Void;
@@ -32,6 +34,8 @@ interface IRequest {
     public function getData(): Dynamic;
 
     public function setData(data: Dynamic): Void;
+
+    public function lock(): Void;
 
     public function addRequestCompletionObserver(observer: IRequestCompletionObserver): Void;
 

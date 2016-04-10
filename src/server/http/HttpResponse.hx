@@ -109,7 +109,7 @@ class HttpResponse implements IResponse {
 
     private function riseReady(): Void {
         ready = true;
-        if(request.getRequestCompletedObservers().length > 0) {
+        if(!request.getRequestCompletedObservers().isEmpty()) {
             var completionObserver: IRequestCompletionObserver = null;
             for(completionObserver in request.getRequestCompletedObservers()) {
                 completionObserver.handleCompletion(this);

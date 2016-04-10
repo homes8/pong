@@ -1,17 +1,17 @@
 package server.http;
 
 
-import server.IRequestCompletionObserver;
-import server.IRetryPolicy;
 import haxe.ds.StringMap;
 import haxe.Constraints.IMap;
-import server.NetworkDataTransformersRegistry;
 
 import server.URL;
 import server.IRequest;
+import server.IRetryPolicy;
 import server.NetworkHeader;
 import server.IRequestQueue;
 import server.INetworkDataTransformer;
+import server.IRequestCompletionObserver;
+import server.NetworkDataTransformersRegistry;
 
 
 /**
@@ -29,6 +29,8 @@ class HttpRequest implements IRequest {
 
 
     private var url: URL = null;
+    private var parallel: Bool = true;
+    private var locked: Bool = false;
     private var method: ERequestMethod = ERequestMethod.GET;
     private var contentType: String;
     private var requestData: Dynamic;
@@ -40,10 +42,11 @@ class HttpRequest implements IRequest {
     private var requestQueue: IRequestQueue = null;
 
 
-    public function new(url: String, contentType: String, ?method: ERequestMethod) {
+    public function new(url: String, contentType: String, ?method: ERequestMethod, ?parallel: Bool = false) {
         this.url = new URL(url);
         this.method = method;
         this.contentType = contentType;
+        this.parallel = parallel;
         addHeader("Access-Control-Allow-Origin", "*");
     }
 
@@ -131,13 +134,23 @@ class HttpRequest implements IRequest {
 
     @override
     public function addRequestCompletionObserver(observer: IRequestCompletionObserver): Void {
-		if(null != observer) {
-			completionObservers.add(observer);
-		}
+        if((null != observer) && !locked) {
+            completionObservers.push(observer);
+        }
     }
 
     @override
     public function getRequestCompletedObservers(): List<IRequestCompletionObserver> {
         return completionObservers;
+    }
+
+    @override
+    public function canBeParallel(): Bool {
+        return parallel;
+    }
+
+    @override
+    public function lock(): Void {
+        locked = true;
     }
 }

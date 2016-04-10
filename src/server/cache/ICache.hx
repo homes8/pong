@@ -5,7 +5,7 @@ package server.cache;
  * @author Dmitry Velichkevich
  */
 interface ICache<ValueType> {
-    public function getValue(var key: String): ValueType;
+    public function getValue(key: String): ValueType;
 
-    public function putValue(var key: String, value: ValueType): void;
+    public function putValue(key: String, value: ValueType): Void;
 }

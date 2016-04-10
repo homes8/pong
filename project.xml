@@ -17,6 +17,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="flixel"/>
+	<haxelib name="hxssl" />
 
 	
 	<!-- assets -->
