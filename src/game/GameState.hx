@@ -73,18 +73,14 @@ class GameState extends FlxState
 		add(_score);
 
 		_spinner.x = _board.x;
-		_spinner.y = _board.y2 - _spinner.height;
+		//_spinner.y = _board.y2 - _spinner.height;
 		add(_spinner);
 		
-		
-		//_spinButton.addEventListener (MouseEvent.CLICK, onSpinClicked);
-		//_spinButton.onUp = new FlxMouseButtonID(onSpinClicked);
+		_strategy.start();
 	}
 	
 	function _onSpinClicked():Void {
 		_strategy.spin();
-		
-		trace("rrrrrrrrrrrrrrrrrr");
 		
 		//var request = new GameRequest();
 		//request.ss();

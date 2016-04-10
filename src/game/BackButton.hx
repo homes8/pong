@@ -8,8 +8,8 @@ import flixel.ui.FlxButton;
  */
 class BackButton extends FlxButton
 {
-	public static var W = 178;
-	public static var H = 48;
+	public static var W = 122;
+	public static var H = 50;
 	
 	private function new(X:Float = 0, Y:Float = 0, ?OnClick:Void->Void)
 	{

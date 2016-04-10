@@ -5,6 +5,7 @@ package game.strategy;
  */
 interface IStrategy
 {
-	public function spin ():Void;
+	public function spin():Void;
+	public function start():Void;
 	private function changeIndex():Void;
 }

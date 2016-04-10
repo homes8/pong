@@ -8,7 +8,24 @@ import flixel.math.FlxPoint;
 /**
  * ...
  * @author vova
+ *
+ * 70  71,72,73,74 75  76
+ *    ----------------
+ * 63 |64,65,66,67,68| 69
+ * 56 |57,58,59,60,61| 62
+ * 49 |50,51,52,53,54| 55
+ * 42 |43,44,45,46,47| 48
+ * 35 |36,37,38,39,40| 41
+ * 28 |29,30,31,32,33| 34
+ * 21 |22,23,24,25,26| 27
+ * 14 |15,16,17,18,19| 20
+ * 7  |8, 9, 10,11,12| 13
+ *    ----------------
+ * 0   1, 2, 3, 4, 5   6
+ *
  */
+// 16 - (16/7) * 7
+
 class Board extends FlxSpriteGroup
 {
 	public var NUM_COLUMNS:Int = 5;
@@ -107,7 +124,36 @@ class Board extends FlxSpriteGroup
 	public function getTilePosition(row:Int, column:Int):FlxPoint {
 		return new FlxPoint(column * Tile.W, row * Tile.H);
 	}
+	
+	public function getTile(index:Int) {
+		var w:Int = NUM_COLUMNS + 2;
+		//var h:Int = NUM_ROWS + 1;
+		var i:Int = index - Std.int(index / w) * NUM_COLUMNS;
+		
+		//_tiles[]
+	}
 }
+
+/*
+{
+data:"1234122121341122412133312432412344214111",
+win:"11243"
+steps:[
+	{ op: "remove", ind: [8,11] },
+	{ op: "add", ind: [71,73], data:[3,1] },
+	{ op: "move", inds: [
+			[15,22,29,36,43,50,57,64,71],
+			[18,25,32,39,46,53,60,67,74]
+		], inde: [
+			[8,15,22,29,36,43,50,57,64],
+			[11,18,25,32,39,46,53,60,67]
+		]
+	}
+]
+}
+
+*/
+
 
 class BoardData {
 	public static var NUM_COLUMNS = 5;

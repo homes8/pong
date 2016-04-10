@@ -34,13 +34,13 @@ class Spinner extends FlxSprite
 		construct();
 	}
 	
-	public function initialize ():Void {
+	private function initialize():Void {
 		_moveToDuration = 0.5;
 		immovable = true;
 		//_background = new FlxSprite(0, 0);
 	}
 	
-	private function construct ():Void {
+	private function construct():Void {
 		//_background.y = 0;
 		//_background.graphics.beginFill (0xFFFFFF, 0.4);
 		//_background.graphics.drawRect (0, 0, columns * Tile.W, Tile.H);
@@ -67,7 +67,7 @@ class Spinner extends FlxSprite
 		moveTo (x, targetY);
 	}
 	
-	private function _onMoveToComplete (Tween:FlxTween):Void {
+	private function _onMoveToComplete(Tween:FlxTween):Void {
 		_tween = null;
 		alpha = 0.5;
 	}
