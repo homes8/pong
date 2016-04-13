@@ -18,8 +18,8 @@
 	<haxelib name="actuate" />
 	<haxelib name="flixel"/>
 	<haxelib name="hxssl" />
+	<haxelib name="hxbolts" />
 
-	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
 	<assets path="assets/img" rename="img" />
