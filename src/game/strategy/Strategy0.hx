@@ -1,7 +1,14 @@
 package game.strategy;
+
 import game.Spinner;
 import game.Board;
+import game.Tile;
 import lime.graphics.console.IndexBuffer;
+
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import hxbolts.Task;
+import hxbolts.TaskCompletionSource;
 
 /**
  * ...
@@ -9,20 +16,22 @@ import lime.graphics.console.IndexBuffer;
  */
 class Strategy0 implements IStrategy
 {
-	private var spinner:Spinner;
-	private var board:Board;
-	private var index:Int;
+	private var _spinner:Spinner;
+	private var _board:Board;
+	private var _index:Int;
+	private var _lastIndex:Int;
 
 	public function new(spinner:Spinner, board:Board)
 	{
-		this.spinner = spinner;
-		this.board = board;
+		_spinner = spinner;
+		_board = board;
 		
 		initialize();
 	}
 
 	private function initialize():Void {
-		index = board.NUM_ROWS - 1;
+		_lastIndex = _board.NUM_ROWS - 3;
+		_index = _lastIndex;
 	}
 	
 	public function start():Void {
@@ -35,27 +44,30 @@ class Strategy0 implements IStrategy
 	}
 	
 	private function changeIndex():Void {
-		index --;
-		if (index < 0) {
-			index = board.NUM_ROWS - 1;
+		_index --;
+		if (_index < 0) {
+			_index = _lastIndex;
 		}
 	}
 	
 	private function moveSpinner():Void {
-		var y:Float = board.getTilePosition(index, 0).y;
-		spinner.moveToY(y);
+		var y:Float = _board.getTilePosition(_index, 0).y;
+		_spinner.moveToY(y);
 		
-		
+		animator();
 	}
 	
 	private function hideSpinner(show:Bool = false):Void {
-		spinner.visible = show;
+		_spinner.visible = show;
 	}
 	
 
 	private function animator():Void {
-		/*
-		var steps = [
+		
+		//var tile:Tile = _board.getTile(68);
+		//trace(tile.column + "-" + tile.row);
+				
+		var steps:Array<Dynamic> = [
 			{ op: "remove", ind: [8,11] },
 			{ op: "add", ind: [71,73], data:[3,1] },
 			{ op: "move", inds: [
@@ -68,12 +80,45 @@ class Strategy0 implements IStrategy
 			}
 		];
 		
-		for (x in 0..steps.length) {
-			
+		
+		for (x in steps) {
+			switch(x.op) {
+				case "remove":
+					_remove(x.ind);
+					break;
+					
+				case "add":
+					break;
+					
+				case "move":
+					break;
+			}
 		}
-		*/
+	
 	}
 	
-	
+	private function _remove(ids:Array<Int>): Task<Bool> {
+		var tcs = new TaskCompletionSource<Bool>();
+		
+		var list:Array<FlxTween> = [];
+		var tween:FlxTween;
+		var tile:Tile;
+		
+		function _completer(tw:FlxTween):Void {
+			if(!tcs.task.isCompleted) tcs.setResult(true);
+		}
+		
+		for (i in ids) {
+			tile = _board.getTile(i);
+			tween = FlxTween.tween(tile, { x: 100.0, y: 100.0 }, 0.5, {
+				ease: FlxEase.quadInOut,
+				onComplete: _completer
+			});
+			list.push(tween);
+		}
+		
+		return tcs.task;
+	}
 	
 }
+

@@ -24,12 +24,11 @@ import flixel.math.FlxPoint;
  * 0   1, 2, 3, 4, 5   6
  *
  */
-// 16 - (16/7) * 7
 
 class Board extends FlxSpriteGroup
 {
-	public var NUM_COLUMNS:Int = 5;
-	public var NUM_ROWS:Int = 9;
+	public var NUM_COLUMNS:Int = 5 + 2;
+	public var NUM_ROWS:Int = 9 + 2;
 	
 	private var _tiles:Array < Array < Tile >> ;
 	private var _data:BoardData;
@@ -97,24 +96,22 @@ class Board extends FlxSpriteGroup
 	public function loadBoard (boardData: BoardData):Void {
 		_data = boardData;
 		
-		for (row in 0...NUM_ROWS) {
-			for (column in 0...NUM_COLUMNS) {
-				
-				addTile (row, column, _data.data[row][column]);
+		for (row in 1...NUM_ROWS - 1) {
+			for (column in 1...NUM_COLUMNS - 1) {
+				addTile (row, column, _data.data[row - 1][column - 1]);
 			}
 		}
 	}
 	
 	private function addTile(row:Int, column:Int, type:Int):Void {
-		
 		var tile = new Tile(_data.tileImages[type]);
 		tile.type = type;
 		tile.row = row;
 		tile.column = column;
-		
+
 		_tiles[row][column] = tile;
 		
-		var position = getTilePosition(row, column);
+		var position = getTilePosition(row - 1, column - 1);
 		tile.x = position.x;
 		tile.y = position.y;
 		
@@ -125,12 +122,13 @@ class Board extends FlxSpriteGroup
 		return new FlxPoint(column * Tile.W, row * Tile.H);
 	}
 	
-	public function getTile(index:Int) {
-		var w:Int = NUM_COLUMNS + 2;
-		//var h:Int = NUM_ROWS + 1;
-		var i:Int = index - Std.int(index / w) * NUM_COLUMNS;
+	public function getTile(index:Int): Tile {
+		var i:Int = Std.int(index / NUM_COLUMNS);
+		var j:Int = Std.int(index % NUM_COLUMNS);
 		
-		//_tiles[]
+		trace(i + ":" + j);
+		
+		return _tiles[i][j];
 	}
 }
 
@@ -140,7 +138,8 @@ data:"1234122121341122412133312432412344214111",
 win:"11243"
 steps:[
 	{ op: "remove", ind: [8,11] },
-	{ op: "add", ind: [71,73], data:[3,1] },
+	{ op: "add", ind: [71,73], da
+	ta:[3,1] },
 	{ op: "move", inds: [
 			[15,22,29,36,43,50,57,64,71],
 			[18,25,32,39,46,53,60,67,74]

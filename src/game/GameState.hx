@@ -46,7 +46,7 @@ class GameState extends FlxState
 		_spinButton = new SpinButton(_onSpinClicked);
 		_backButton = new BackButton(_onBackClicked);
 		_score = new Score();
-		_spinner = new Spinner(_board.NUM_COLUMNS);
+		_spinner = new Spinner(_board.NUM_COLUMNS - 2);
 		
 		_strategy = new Strategy0(_spinner, _board);
 	}
