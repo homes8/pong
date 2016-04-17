@@ -1,7 +1,7 @@
 package game.strategy;
 
-import game.Spinner;
 import game.Board;
+import game.IReel;
 import game.Tile;
 import lime.graphics.console.IndexBuffer;
 
@@ -14,16 +14,15 @@ import hxbolts.TaskCompletionSource;
  * ...
  * @author vova
  */
-class Strategy0 implements IStrategy
-{
-	private var _spinner:Spinner;
+class Strategy0 implements IStrategy {
+	private var reel: IReel;
 	private var _board:Board;
 	private var _index:Int;
 	private var _lastIndex:Int;
 
-	public function new(spinner:Spinner, board:Board)
-	{
-		_spinner = spinner;
+
+	public function new(reel: IReel, board: Board) {
+		this.reel = reel;
 		_board = board;
 		
 		initialize();
@@ -52,13 +51,13 @@ class Strategy0 implements IStrategy
 	
 	private function moveSpinner():Void {
 		var y:Float = _board.getTilePosition(_index, 0).y;
-		_spinner.moveToY(y);
-		
+		reel.moveTo(y);
+
 		animator();
 	}
 	
 	private function hideSpinner(show:Bool = false):Void {
-		_spinner.visible = show;
+		reel.setVisibility(show);
 	}
 	
 

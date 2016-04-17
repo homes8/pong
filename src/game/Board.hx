@@ -160,7 +160,7 @@ class BoardData {
 	
 	public var data:Array < Array < Int >> ;
 
-	public var tileImages = [ "img/themes/0/game_0.png", "img/themes/0/game_1.png", "img/themes/0/game_2.png", "img/themes/0/game_3.png", "img/themes/0/game_4.png", "img/themes/0/game_5.png" ];
+	public var tileImages: Array<String> = [ "img/themes/0/game_0.png", "img/themes/0/game_1.png", "img/themes/0/game_2.png", "img/themes/0/game_3.png", "img/themes/0/game_4.png", "img/themes/0/game_5.png" ];
 
 	
 	public function new()
